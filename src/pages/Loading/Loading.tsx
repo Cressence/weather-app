@@ -1,8 +1,13 @@
 import React from 'react';
 
-const Loading = () => {
+import Wrapper from './../../components/Wrapper';
+import './loading.scss';
+
+const Loading = ( ) => {
     return (
-        <p>Loading...</p>
+        <Wrapper>
+            <p>Loading...</p>
+        </Wrapper>
     );
 }
 
