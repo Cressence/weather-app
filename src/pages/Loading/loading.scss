@@ -1,0 +1,56 @@
+@import './../../assets/scss/variables.scss';
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    top: 30%;
+    height: 100%;
+    position: relative;
+
+    .loader-text {
+        text-align: center;
+        font-size: $sub-title;
+        font-weight: bolder;
+        letter-spacing: 3px;
+    }
+
+    .loader {
+        position: absolute;
+        margin-left: 10px;
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: $dark-shade1;
+            display: inline-block;
+            border-radius: 50%;
+            margin-left: 2px;
+            margin-right: 2px;
+            animation: vertical-wave 2s infinite;
+
+            @for $i from 1 through length($animation-colors) {
+                &:nth-child(#{length($animation-colors)}n + #{$i}) {
+                  background: nth($animation-colors, $i);
+                  animation-delay: 0.2s * $i;
+                }
+              }
+        }
+
+        @media (max-width: $medium-devices){
+            margin-left: 15px;
+        }
+    }
+
+    @keyframes vertical-wave {
+        0% {
+          transform: translate(0, 0px);
+        }
+        50% {
+          opacity: 0.3;
+          transform: translate(0, 20px);
+        }
+        100% {
+          transform: translate(0, 0px);
+        }
+      }
+}

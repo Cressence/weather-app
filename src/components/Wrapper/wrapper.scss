@@ -20,6 +20,10 @@
         background-color: #dbdbdb96;
         backdrop-filter: blur(7px);
 
+        .MuiCardContent-root {
+            height: 100%;
+        }
+
         @media (max-width: $small-devices){
             width: 100%;
             height: 80%;
