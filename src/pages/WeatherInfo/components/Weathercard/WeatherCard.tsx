@@ -7,9 +7,9 @@ interface WeatherProps {
 }
 
 const WeatherCard = (props: WeatherProps) => {
-    const {unit} = props;
+    const {unit, onClick} = props;
     return (
-        <div className='weather-card-container'>
+        <div className='weather-card-container' onClick={onClick}>
             <img className='weather-icon' alt='weather-icon' src='http://openweathermap.org/img/wn/04d@2x.png' />
             <p className='temperature-text'>
                 <span>12</span> {' '}
