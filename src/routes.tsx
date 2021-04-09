@@ -1,6 +1,6 @@
 import {Fragment} from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Loading from './pages/Loading/Loading';
+import Loading from './pages/Loading';
 
 
 const Routes = () => {
