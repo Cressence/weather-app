@@ -1,0 +1,41 @@
+@import './../../assets/scss/variables.scss';
+
+.weather-info-container {
+    padding: 0 20px;
+
+    .current-location {
+        display: flex;
+        justify-content: space-between;
+
+        .time-text {
+            font-size: $big-title;
+            margin-bottom: 0;
+        }
+        .am-pm {
+            font-size: $sub-title1;
+        }
+        .location-text {
+            font-size: $sub-title;
+        }
+        .date-text {
+            margin-top: 0;
+            letter-spacing: 3px;
+        }
+        .time-section {
+            margin-bottom: 0;
+        }
+    }
+
+    .navigator-section {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 15px;
+    }
+
+    .weather-card-section{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        margin-top: 20px;
+    }
+}
