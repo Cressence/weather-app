@@ -9,24 +9,26 @@ import { Animation } from '@devexpress/dx-react-chart';
 
 import './barchart.scss';
 import Weather from '../../../../api/models/weather.model';
-import { minAndSec } from '../../../../utils/helper';
 
 interface BarChartProps {
     temps: Weather;
+    unit: string
 }
 
 const BarChart = (props: BarChartProps) => {
-    const { temps } =  props;
+    const {temps, unit } =  props;
     const data:any = [];
-    temps.tempCollection[0].forEach((temp:any) => {
+    console.log(temps);
+    
+    temps.tempCollection.forEach((temp:any) => {
         const tableData = {
-            time: minAndSec(temp.dt_txt),
+            time: `${temp.main.temp}${unit === 'celcius'? 'C' : 'F'}`,
             temperature: temp.main.temp
         }
         
         data.push(tableData);
     });
-    console.log(data);
+
     return (
         <div className='bar-chart-container'>
             <Chart data={data}>

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Radio, RadioGroup, FormControlLabel, FormControl, Grid } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux"
+import { Dispatch } from "redux";
+import { useHistory } from "react-router-dom";
 
 import Wrapper from './../../components/Wrapper';
 import WeatherCard from "./components/Weathercard";
@@ -27,7 +28,8 @@ const WeatherInfo = () => {
     const { weatherInfo } = useSelector((state: RootState) => ({
         weatherInfo: state.weatherInfo.weatherData
     }));
-      const dispatch: Dispatch<any> = useDispatch();
+    const dispatch: Dispatch<any> = useDispatch();
+    const history = useHistory();
 
     const toggleTempUnit = (event: any) => {
         setTempUnit(event.target.value);
@@ -39,9 +41,10 @@ const WeatherInfo = () => {
     }
 
     useEffect(() => {
-        dispatch(getWeatherData('Munich,de', tempUnit));
-    }, [dispatch, tempUnit]);
-    console.log(selectedInfo);
+        if (weatherInfo === null) {
+            history.push("/weather-app");
+        }
+    }, [history, weatherInfo]);
     
     return (
         <Wrapper>
@@ -79,7 +82,7 @@ const WeatherInfo = () => {
                     }          
                 </Grid>
                 {
-                    selectedInfo !== null ? <BarChart temps={selectedInfo} /> : null
+                    selectedInfo !== null ? <BarChart temps={selectedInfo} unit={tempUnit} /> : null
                 }
                     
             </div>

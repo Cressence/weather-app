@@ -1,29 +1,44 @@
 import { WEATHER_SUCCESS } from "./constants";
 import Weather from "./../../api/models/weather.model";
+import { calculateAverageData } from "../../utils/helper";
 
 const initialState: any = {
-    weatherData: [],
+    weatherData: null,
   };
 
 const weatherInfo = (state = initialState, action: any) => {
     switch (action.type) {
         case WEATHER_SUCCESS: {
           if (action.data.cod === "200") {
-            let weather: Weather[] = [];
+
+            //Build an array of objects in the format our interface uses.
+            //Using the Weather interface 
+            // let weather: Weather[] = [];
             const completeData = action.data.list;
-            for (let count = 0; count < completeData.length; count += 8) {
-              const singleWeather = completeData[count];
-              let info: Weather = {
-                temperature: singleWeather.main.temp,
-                pressure: singleWeather.main.pressure,
-                description: singleWeather.weather[0].description,
-                icon: singleWeather.weather[0].icon,
-                date: singleWeather.dt_txt,
-                humidity: singleWeather.main.humidity,
-                tempCollection: [completeData.slice(count, count + 7)]
+            
+            // Group temperatures per day
+            const dailyTemps = completeData.reduce((dailyTemps:any[], temp:any) => {
+              const date  = temp.dt_txt.split(' ')[0];
+
+              if (!dailyTemps[date]) {
+                dailyTemps[date] = [];
               }
-              weather.push(info);
-            }
+              dailyTemps[date].push(temp);
+              return dailyTemps;
+            }, {});
+
+            //Build array of temperatures
+            let weather: Weather[] = Object.keys(dailyTemps).map(date => {
+              return {
+                temperature: calculateAverageData(dailyTemps[date], 'temperature'),
+                pressure: calculateAverageData(dailyTemps[date], 'pressure'),
+                description: dailyTemps[date][0].weather[0].description,
+                icon: dailyTemps[date][0].weather[0].icon,
+                date: dailyTemps[date][0].dt_txt,
+                humidity: calculateAverageData(dailyTemps[date], 'humidity'),
+                tempCollection: dailyTemps[date]
+              }
+            });
 
             return {
               ...state,

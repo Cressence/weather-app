@@ -22,8 +22,8 @@ const WeatherCard = (props: WeatherProps) => {
             <p className='temp-description'>{weatherInfo.description}</p>
             <div>
                 <p className='medium-text'>Date: {formatDate(weatherInfo.date)}</p>
-                <p className='medium-text'><span>Pressure: </span> <span>{weatherInfo.pressure}</span><span>Pa</span></p>
-                <p className='medium-text'><span>Humidity: </span> <span>{weatherInfo.humidity}</span><span>Pa</span></p>
+                <p className='medium-text'><span>Avg. Pressure: </span> <span>{weatherInfo.pressure}</span><span>Pa</span></p>
+                <p className='medium-text'><span>Avg. Humidity: </span> <span>{weatherInfo.humidity}</span><span>Pa</span></p>
             </div>
         </div>
     );

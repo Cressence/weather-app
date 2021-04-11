@@ -37,9 +37,20 @@ export const formatDate = (date: string) => {
     return `${formatedDate.getDate()} ${convertMonthToText(formatedDate.getMonth())} ${formatedDate.getUTCFullYear()}`;
 };
 
-export const minAndSec = (date:string) => {
-    const newDate = new Date(date);
-    return `${pad(newDate.getHours())}:${pad(newDate.getMinutes())}`;
+export const calculateAverageData = (arrTemps: number[], type:string) => {
+    let sum:number = 0;
+    arrTemps.forEach((temp:any) => {
+        if (type === 'temperature') {
+            sum += temp.main.temp;
+        }
+        if (type === 'pressure') {
+            sum += temp.main.pressure;
+        }
+        if (type === 'humidity') {
+            sum += temp.main.humidity;
+        }
+    });
+    return round((sum / arrTemps.length), 1);
 };
 
 const round = (value:number, precision:number) => {
