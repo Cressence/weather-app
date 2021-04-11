@@ -1,6 +1,8 @@
-import React from 'react';
-import { Radio, RadioGroup, FormControlLabel, FormControl } from "@material-ui/core";
+import React, { useEffect } from 'react';
+import { Radio, RadioGroup, FormControlLabel, FormControl, Grid } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux"
 
 import Wrapper from './../../components/Wrapper';
 import WeatherCard from "./components/Weathercard";
@@ -10,29 +12,37 @@ import {
     getCurrentDate,
     getCurrentLocation,
     getAmPm,
-    convertFahrenheitToCelcius,
-    convertCelciusToFahrenheit
 } from "./../../utils/helper";
 import './weatherInfo.scss';
+import { getWeatherData } from "./../../store/root/action";
+import { RootState } from '../../store/root/rootReducer';
+import Weather from "./../../api/models/weather.model";
 
 const WeatherInfo = () => {
+    // Component state
     const [tempUnit, setTempUnit] = React.useState<string>('celcius');
-    const [showChart, setShowChart] = React.useState<boolean>(false);
+    const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
+
+    // Redux state
+    const { weatherInfo } = useSelector((state: RootState) => ({
+        weatherInfo: state.weatherInfo.weatherData
+    }));
+      const dispatch: Dispatch<any> = useDispatch();
 
     const toggleTempUnit = (event: any) => {
         setTempUnit(event.target.value);
-
-        if (event.target.value === 'celsius') {
-            convertFahrenheitToCelcius(event.target.value);
-        } else {
-            convertCelciusToFahrenheit(event.target.value);
-        }
+        dispatch(getWeatherData('Munich,de', event.target.value));
     }
 
-    const onWeatherCardClick = () => {
-        setShowChart(true);
+    const onWeatherCardClick = (selectedCard:Weather) => {
+        setSelectedInfo(selectedCard);
     }
 
+    useEffect(() => {
+        dispatch(getWeatherData('Munich,de', tempUnit));
+    }, [dispatch, tempUnit]);
+    console.log(selectedInfo);
+    
     return (
         <Wrapper>
             <div className='weather-info-container'>
@@ -55,13 +65,21 @@ const WeatherInfo = () => {
                     <ArrowBack fontSize='large'/>
                     <ArrowForward fontSize='large' />
                 </div>
-                <div className='weather-card-section'>
-                    <WeatherCard unit={tempUnit} onClick={onWeatherCardClick} />
-                    <WeatherCard unit={tempUnit} onClick={onWeatherCardClick} />
-                    <WeatherCard unit={tempUnit} onClick={onWeatherCardClick} />               
-                </div>
+                <Grid container spacing={2} className=''>
+                    {
+                        weatherInfo !== null ?
+                        weatherInfo.map((info:Weather, index: number) => {
+                            return (
+                                <Grid item xs={12} sm={6} md={4} key={index}>
+                                    <WeatherCard unit={tempUnit} onClick={() => onWeatherCardClick(info)} weatherInfo={info} />
+                                </Grid>
+                            );
+                        })
+                        : null
+                    }          
+                </Grid>
                 {
-                    showChart ? <BarChart /> : null
+                    selectedInfo !== null ? <BarChart temps={selectedInfo} /> : null
                 }
                     
             </div>

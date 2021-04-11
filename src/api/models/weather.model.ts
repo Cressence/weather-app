@@ -3,6 +3,7 @@ export default interface Weather {
     pressure: number;
     description: string;
     icon: string;
-    date: number;
-    humidity: number
+    date: string;
+    humidity: number;
+    tempCollection: any[]
   }

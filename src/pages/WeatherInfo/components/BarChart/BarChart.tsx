@@ -8,24 +8,33 @@ import {
 import { Animation } from '@devexpress/dx-react-chart';
 
 import './barchart.scss';
+import Weather from '../../../../api/models/weather.model';
+import { minAndSec } from '../../../../utils/helper';
 
-const data = [
-    { year: '1970', population: 3.682 },
-    { year: '1980', population: 4.440 },
-    { year: '1990', population: 5.310 },
-    { year: '2000', population: 6.127 },
-    { year: '2010', population: 6.930 },
-  ];
+interface BarChartProps {
+    temps: Weather;
+}
 
-const BarChart = () => {
+const BarChart = (props: BarChartProps) => {
+    const { temps } =  props;
+    const data:any = [];
+    temps.tempCollection[0].forEach((temp:any) => {
+        const tableData = {
+            time: minAndSec(temp.dt_txt),
+            temperature: temp.main.temp
+        }
+        
+        data.push(tableData);
+    });
+    console.log(data);
     return (
         <div className='bar-chart-container'>
             <Chart data={data}>
                 <ArgumentAxis tickSize={3} showLine={false} />
 
                 <BarSeries
-                    valueField="population"
-                    argumentField="year"
+                    valueField="temperature"
+                    argumentField="time"
                 />
                 <Title text="2021 Nov 20" />
                 <Animation />

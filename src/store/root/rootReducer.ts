@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 
 //Import reducers
-// import auth from "./auth";
+import weatherInfo from "./weatherInfo.reducer";
 
 const rootReducer = combineReducers({
-//   auth,
+    weatherInfo,
 });
 
 export default rootReducer;
+
+export type RootState = ReturnType<typeof rootReducer>

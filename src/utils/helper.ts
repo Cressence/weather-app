@@ -7,7 +7,7 @@ export const getCurrentDate = () => {
 
 export const getCurrentTime = () => {
     const today = new Date();
-    return `${today.getHours()}:${today.getMinutes()}`;
+    return `${pad(today.getHours())}:${pad(today.getMinutes())}`;
 };
 
 export const getAmPm = () => {
@@ -24,10 +24,27 @@ export const convertMonthToText = (month: number) => {
     return months[month];
 };
 
-export const convertCelciusToFahrenheit = (celcius: number) => {
-    return celcius * 1.8 + 32;
+export const convertkelvinToFahrenheit = (kelvin: number) => {
+    return round((((kelvin - 273.15) * 1.8) + 32), 1);
 };
 
-export const convertFahrenheitToCelcius = (farhenheit: number) => {
-    return (farhenheit- 32) / 1.8;
+export const convertKelvinToCelcius = (kelvin: number) => {    
+    return round((kelvin - 273.15), 1);
 };
+
+export const formatDate = (date: string) => {
+    const formatedDate = new Date(date);
+    return `${formatedDate.getDate()} ${convertMonthToText(formatedDate.getMonth())} ${formatedDate.getUTCFullYear()}`;
+};
+
+export const minAndSec = (date:string) => {
+    const newDate = new Date(date);
+    return `${pad(newDate.getHours())}:${pad(newDate.getMinutes())}`;
+};
+
+const round = (value:number, precision:number) => {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+};
+
+const pad = (time:number) =>  time < 10 ? '0' + time : time;
