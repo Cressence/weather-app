@@ -9,6 +9,7 @@ import { Animation } from '@devexpress/dx-react-chart';
 
 import './barchart.scss';
 import Weather from '../../../../api/models/weather.model';
+import { formatDate } from '../../../../utils/helper';
 
 interface BarChartProps {
     temps: Weather;
@@ -18,7 +19,6 @@ interface BarChartProps {
 const BarChart = (props: BarChartProps) => {
     const {temps, unit } =  props;
     const data:any = [];
-    console.log(temps);
     
     temps.tempCollection.forEach((temp:any) => {
         const tableData = {
@@ -35,10 +35,10 @@ const BarChart = (props: BarChartProps) => {
                 <ArgumentAxis tickSize={3} showLine={false} />
 
                 <BarSeries
-                    valueField="temperature"
-                    argumentField="time"
+                    valueField='temperature'
+                    argumentField='time'
                 />
-                <Title text="2021 Nov 20" />
+                <Title text={formatDate(temps.date)} />
                 <Animation />
             </Chart> 
         </div>

@@ -4,14 +4,13 @@ import './weatherCard.scss';
 
 interface WeatherProps {
     unit: string;
-    onClick: any;
     weatherInfo: Weather
 }
 
 const WeatherCard = (props: WeatherProps) => {
-    const {unit, onClick, weatherInfo} = props;
+    const {unit, weatherInfo} = props;
     return (
-        <div className='weather-card-container' onClick={() => onClick(weatherInfo)}>
+        <div className='weather-card-container'>
             <img className='weather-icon' alt='weather-icon' src={`https://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`} />
             <p className='temperature-text'>
                 <span> { weatherInfo.temperature }</span> {' '} <span>

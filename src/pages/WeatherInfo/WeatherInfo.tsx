@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
-import { Radio, RadioGroup, FormControlLabel, FormControl, Grid } from "@material-ui/core";
-import { ArrowBack, ArrowForward } from "@material-ui/icons";
+import { Radio, RadioGroup, FormControlLabel, FormControl } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
 
 import Wrapper from './../../components/Wrapper';
-import WeatherCard from "./components/Weathercard";
 import BarChart from './components/BarChart';
+import Carousel from './../../components/Carousel';
 import { 
     getCurrentTime,
     getCurrentDate,
     getCurrentLocation,
     getAmPm,
-} from "./../../utils/helper";
+} from './../../utils/helper';
 import './weatherInfo.scss';
 import { getWeatherData } from "./../../store/root/action";
 import { RootState } from '../../store/root/rootReducer';
@@ -64,23 +63,12 @@ const WeatherInfo = () => {
                     </RadioGroup>
                     </FormControl>
                 </div>
-                <div className='navigator-section'>
-                    <ArrowBack fontSize='large'/>
-                    <ArrowForward fontSize='large' />
-                </div>
-                <Grid container spacing={2} className=''>
-                    {
-                        weatherInfo !== null ?
-                        weatherInfo.map((info:Weather, index: number) => {
-                            return (
-                                <Grid item xs={12} sm={6} md={4} key={index}>
-                                    <WeatherCard unit={tempUnit} onClick={() => onWeatherCardClick(info)} weatherInfo={info} />
-                                </Grid>
-                            );
-                        })
+                {
+                    weatherInfo !== null ?
+                        <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} tempUnit={tempUnit} />
                         : null
-                    }          
-                </Grid>
+                }
+                
                 {
                     selectedInfo !== null ? <BarChart temps={selectedInfo} unit={tempUnit} /> : null
                 }
