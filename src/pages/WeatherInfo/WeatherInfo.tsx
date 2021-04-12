@@ -21,7 +21,7 @@ import Weather from "./../../api/models/weather.model";
 const WeatherInfo = () => {
     const selectedUnit = localStorage.getItem('unit');
     // Component state
-    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null? 'celcius': selectedUnit);
+    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null? 'fahrenheit': selectedUnit);
     const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
 
     // Redux state
@@ -60,8 +60,8 @@ const WeatherInfo = () => {
                 <div>
                 <FormControl>
                     <RadioGroup row aria-label='temperature' name='temparature unit' value={tempUnit} onChange={toggleTempUnit} >
-                        <FormControlLabel value='celcius' control={<Radio color='primary' />} label="Celsius" />
                         <FormControlLabel value='fahrenheit' control={<Radio color='primary' />} label='Fahrenheit' />
+                        <FormControlLabel value='celcius' control={<Radio color='primary' />} label="Celsius" />
                     </RadioGroup>
                     </FormControl>
                 </div>

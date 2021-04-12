@@ -16,7 +16,7 @@ const WeatherCard = (props: WeatherProps) => {
                 <span> { weatherInfo.temperature }</span> {' '} <span>
                     <sup>o</sup>
                     {
-                        selectedUnit === null ? 'C'
+                        selectedUnit === null ? 'F'
                         : 
                         selectedUnit === 'celcius'? 'C' : 'F'
                     }

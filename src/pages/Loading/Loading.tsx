@@ -18,7 +18,7 @@ const Loading = ( ) => {
     useEffect(() => {
         const selectedUnit = localStorage.getItem('unit');
         dispatch(
-            getWeatherData('Munich,de', selectedUnit === null ? 'celcius': selectedUnit)
+            getWeatherData('Munich,de', selectedUnit === null ? 'fahrenheit': selectedUnit)
         );
 
         if (weatherInfo !== null) {

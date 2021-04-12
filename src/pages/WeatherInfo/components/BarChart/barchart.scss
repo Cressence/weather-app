@@ -1,6 +1,11 @@
+@import './../../../../assets/scss/variables.scss';
 
 .bar-chart-container {
     width: 65%;
     margin: 40px auto;
     background-color: #eeeeeea8;
+
+    @media (max-width: $medium-devices){
+        width: 100%;
+    }
 }
