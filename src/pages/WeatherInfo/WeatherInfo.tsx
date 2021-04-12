@@ -14,13 +14,14 @@ import {
     getAmPm,
 } from './../../utils/helper';
 import './weatherInfo.scss';
-import { getWeatherData } from "./../../store/root/action";
+import { resetData } from "./../../store/root/action";
 import { RootState } from '../../store/root/rootReducer';
 import Weather from "./../../api/models/weather.model";
 
 const WeatherInfo = () => {
+    const selectedUnit = localStorage.getItem('unit');
     // Component state
-    const [tempUnit, setTempUnit] = React.useState<string>('celcius');
+    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null? 'celcius': selectedUnit);
     const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
 
     // Redux state
@@ -32,7 +33,8 @@ const WeatherInfo = () => {
 
     const toggleTempUnit = (event: any) => {
         setTempUnit(event.target.value);
-        dispatch(getWeatherData('Munich,de', event.target.value));
+        localStorage.setItem('unit', event.target.value);
+        dispatch(resetData());
     }
 
     const onWeatherCardClick = (selectedCard:Weather) => {
@@ -65,7 +67,7 @@ const WeatherInfo = () => {
                 </div>
                 {
                     weatherInfo !== null ?
-                        <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} tempUnit={tempUnit} />
+                        <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} />
                         : null
                 }
                 

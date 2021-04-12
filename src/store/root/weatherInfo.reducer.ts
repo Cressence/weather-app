@@ -1,9 +1,10 @@
-import { WEATHER_SUCCESS } from "./constants";
+import { RESET, WEATHER_SUCCESS } from "./constants";
 import Weather from "./../../api/models/weather.model";
 import { calculateAverageData } from "../../utils/helper";
 
 const initialState: any = {
     weatherData: null,
+    appError: null
   };
 
 const weatherInfo = (state = initialState, action: any) => {
@@ -47,9 +48,15 @@ const weatherInfo = (state = initialState, action: any) => {
           } else {
             return {
               ...state,
-              appError:
-                action.data.message !== undefined ? action.data.message : "",
+              appError: action.data
             };
+          }
+        }
+        case RESET: {
+          return {
+            ...state,
+            weatherData: null,
+            appError: null
           }
         }
         default:

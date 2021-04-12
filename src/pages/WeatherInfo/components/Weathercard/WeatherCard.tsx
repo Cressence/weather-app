@@ -3,19 +3,23 @@ import { formatDate } from '../../../../utils/helper';
 import './weatherCard.scss';
 
 interface WeatherProps {
-    unit: string;
     weatherInfo: Weather
 }
 
 const WeatherCard = (props: WeatherProps) => {
-    const {unit, weatherInfo} = props;
+    const {weatherInfo} = props;
+    const selectedUnit = localStorage.getItem('unit');
     return (
         <div className='weather-card-container'>
             <img className='weather-icon' alt='weather-icon' src={`https://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`} />
             <p className='temperature-text'>
                 <span> { weatherInfo.temperature }</span> {' '} <span>
                     <sup>o</sup>
-                    {unit === 'celcius'? 'C' : 'F'}
+                    {
+                        selectedUnit === null ? 'C'
+                        : 
+                        selectedUnit === 'celcius'? 'C' : 'F'
+                    }
                 </span>
             </p>
             <p className='temp-description'>{weatherInfo.description}</p>

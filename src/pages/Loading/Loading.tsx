@@ -16,7 +16,10 @@ const Loading = ( ) => {
       const history = useHistory();
 
     useEffect(() => {
-        dispatch(getWeatherData('Munich,de', 'celcius'));
+        const selectedUnit = localStorage.getItem('unit');
+        dispatch(
+            getWeatherData('Munich,de', selectedUnit === null ? 'celcius': selectedUnit)
+        );
 
         if (weatherInfo !== null) {
             history.push("/weather-app/info");

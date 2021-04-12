@@ -9,7 +9,6 @@ import './carousel.scss';
 interface CarouselProps {
     data: Weather[];
     clickGetInfo: any;
-    tempUnit: string
 }
 
 const pages = (data: Weather[]) => {
@@ -23,7 +22,7 @@ const pages = (data: Weather[]) => {
 };
 
 const Carousel = (props: CarouselProps) => {
-    const { data, clickGetInfo, tempUnit } = props;
+    const { data, clickGetInfo } = props;
     const [activeIndex, setActiveIndex] = useState(0);
 
     const goToPrevSlide = () => {
@@ -90,7 +89,7 @@ const Carousel = (props: CarouselProps) => {
                                                     onClick={() => clickGetInfo(info)}
                                                     className={index === activeIndex ? 'active' : 'inactive'}
                                                 >
-                                                    <WeatherCard unit={tempUnit} weatherInfo={info} />
+                                                    <WeatherCard weatherInfo={info} />
                                                 </Grid>
                                             );
                                         })

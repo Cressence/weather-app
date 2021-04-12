@@ -1,4 +1,4 @@
-import { WEATHER_FAILURE, WEATHER_SUCCESS } from "./constants";
+import { WEATHER_FAILURE, WEATHER_SUCCESS, RESET } from "./constants";
 
 const APPID = '75f972b80e26f14fe6c920aa6a85ad57';
 
@@ -36,4 +36,11 @@ export const getWeatherData = (city: string, tempUnit:string) => (dispatch: any)
           data: resp,
         });
       });
+};
+
+export const resetData = () => (dispatch: any) => {
+    return dispatch({
+        type: RESET,
+        data: null,
+      });;
 };
