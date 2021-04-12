@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowBack, ArrowForward } from '@material-ui/icons';
 import {  Grid } from '@material-ui/core';
 
@@ -11,19 +11,40 @@ interface CarouselProps {
     clickGetInfo: any;
 }
 
-const pages = (data: Weather[]) => {
+const pages = (data:Weather[], width:number) => {   
+    // Calculate the number of pages per device type
     const weatherArray = [];
-    for (let count = 0; count < data.length; count += 3) {
-        const currentCount = count;
-        const maxCount = (currentCount + 3) > (data.length -1) ? data.length: currentCount + 3;
-        weatherArray.push(data.slice(currentCount, maxCount));
+
+    if (width > 531 && width < 769) {
+        //For tablets
+        for (let count = 0; count < data.length; count += 2) {
+            const currentCount = count;
+            const maxCount = (currentCount + 2) > (data.length -1) ? data.length: currentCount + 2;
+            weatherArray.push(data.slice(currentCount, maxCount));
+        } 
+    } else if (width < 531) {
+        //For mobile
+        for (let count = 0; count < data.length; count ++) {
+            const currentCount = count;
+            const maxCount = (currentCount + 1) > (data.length -1) ? data.length: currentCount + 1;
+            weatherArray.push(data.slice(currentCount, maxCount));
+        } 
+    } else {
+        //For laptops
+        for (let count = 0; count < data.length; count += 3) {
+            const currentCount = count;
+            const maxCount = (currentCount + 3) > (data.length -1) ? data.length: currentCount + 3;
+            weatherArray.push(data.slice(currentCount, maxCount));
+        } 
     }
+    
     return weatherArray;
 };
 
 const Carousel = (props: CarouselProps) => {
     const { data, clickGetInfo } = props;
     const [activeIndex, setActiveIndex] = useState(0);
+    const [pageWidth, setPageWidth] = useState(window.innerWidth);
 
     const goToPrevSlide = () => {
         let index = activeIndex;
@@ -49,21 +70,30 @@ const Carousel = (props: CarouselProps) => {
         
         setActiveIndex(index);
     }
-    
+    const updateWidth = () => {
+        setPageWidth(window.innerWidth);
+    }
+
+    useEffect(() => {
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+        return () => window.removeEventListener("resize", updateWidth);
+    }, [setPageWidth]);
+
     return (
         <div className='carousel-container'>
             <div className='carousel-item'>
                 <div className='navigator-section'>
                     <div>
                         {
-                            activeIndex !== 0 ?
+                            activeIndex > 0 ?
                             <ArrowBack fontSize='large' onClick={goToPrevSlide} />
                             : null
                         }
                     </div>
                     <div>
                         {
-                            activeIndex !==  pages.length ?
+                            activeIndex <  pages.length - 1 ?
                             <ArrowForward fontSize='large' onClick={goToNextSlide} />
                             : null
                         }
@@ -72,7 +102,8 @@ const Carousel = (props: CarouselProps) => {
                 
                     {
                         // loop and display every page
-                        pages(data).map((carouselLoop:Weather[], index: number) => {
+                        pages(data, pageWidth).map((carouselLoop:Weather[], index: number) => {
+                            console.log(pages)
                             return (
                                 <div key={index}>
                                     <Grid container spacing={2}>
