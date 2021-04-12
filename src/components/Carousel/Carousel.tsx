@@ -45,6 +45,7 @@ const Carousel = (props: CarouselProps) => {
     const { data, clickGetInfo } = props;
     const [activeIndex, setActiveIndex] = useState(0);
     const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    const [pageNum, setpageNum] = useState(0);
 
     const goToPrevSlide = () => {
         let index = activeIndex;
@@ -70,15 +71,17 @@ const Carousel = (props: CarouselProps) => {
         
         setActiveIndex(index);
     }
-    const updateWidth = () => {
-        setPageWidth(window.innerWidth);
-    }
 
     useEffect(() => {
+        const updateWidth = () => {
+            setPageWidth(window.innerWidth);
+            setpageNum(pages(data, window.innerWidth).length);
+        }
+
         updateWidth();
         window.addEventListener('resize', updateWidth);
         return () => window.removeEventListener("resize", updateWidth);
-    }, [setPageWidth]);
+    }, [setPageWidth, data]);
 
     return (
         <div className='carousel-container'>
@@ -93,7 +96,7 @@ const Carousel = (props: CarouselProps) => {
                     </div>
                     <div>
                         {
-                            activeIndex <  pages.length - 1 ?
+                            activeIndex <  pageNum - 1 ?
                             <ArrowForward fontSize='large' onClick={goToNextSlide} />
                             : null
                         }
@@ -103,7 +106,7 @@ const Carousel = (props: CarouselProps) => {
                     {
                         // loop and display every page
                         pages(data, pageWidth).map((carouselLoop:Weather[], index: number) => {
-                            console.log(pages)
+                            console.log(pages.length)
                             return (
                                 <div key={index}>
                                     <Grid container spacing={2}>
