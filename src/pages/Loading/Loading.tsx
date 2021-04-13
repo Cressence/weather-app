@@ -1,35 +1,54 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
+import { Button } from '@material-ui/core';
 
 import Wrapper from './../../components/Wrapper';
 import { RootState } from '../../store/root/rootReducer';
-import { getWeatherData } from "./../../store/root/action";
+import { getWeatherData, resetData } from "./../../store/root/action";
 import './loading.scss';
 
 const Loading = ( ) => {
-    const { weatherInfo } = useSelector((state: RootState) => ({
-        weatherInfo: state.weatherInfo.weatherData
+    const selectedUnit = localStorage.getItem('unit');
+    const selectedCity = localStorage.getItem('city');
+    const { weatherInfo, appError } = useSelector((state: RootState) => ({
+        weatherInfo: state.weatherInfo.weatherData,
+        appError: state.weatherInfo.appError
     }));
-      const dispatch: Dispatch<any> = useDispatch();
-      const history = useHistory();
+
+    const dispatch: Dispatch<any> = useDispatch();
+    const history = useHistory();
+
+    const goBackToDefaultWeather = () => {
+        localStorage.clear();
+        dispatch(resetData());
+    }
 
     useEffect(() => {
-        const selectedUnit = localStorage.getItem('unit');
         dispatch(
-            getWeatherData('Munich,de', selectedUnit === null ? 'fahrenheit': selectedUnit)
+            getWeatherData(
+                selectedCity === null? 'Munich': selectedCity,
+                selectedUnit === null ? 'fahrenheit': selectedUnit
+            )
         );
 
         if (weatherInfo !== null) {
             history.push("/weather-app/info");
         }
-    }, [dispatch, history, weatherInfo]);
+    }, [dispatch, history, weatherInfo, selectedUnit, selectedCity]);
 
     return (
         <Wrapper>
             <div className='loading-container'>
-                <div>
+                {
+                    appError !== null ?
+                    <div>
+                        <p className='loader-text'>City "{selectedCity}" not found!</p>
+                        <Button onClick={goBackToDefaultWeather} className='back-button' variant="contained" color="primary">Back</Button>
+                    </div>             
+                    :
+                    <div>
                     <p className='loader-text'>Almost there</p>
                     <div className="loader">
                         <div className="dot" />
@@ -39,6 +58,8 @@ const Loading = ( ) => {
                         <div className="dot" />
                     </div>
                 </div>
+                }
+                
                 
             </div>
         </Wrapper>

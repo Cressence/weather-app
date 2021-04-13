@@ -13,7 +13,7 @@ import { formatDate } from '../../../../utils/helper';
 
 interface BarChartProps {
     temps: Weather;
-    unit: string
+    unit: string;
 }
 
 const BarChart = (props: BarChartProps) => {

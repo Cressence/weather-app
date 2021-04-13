@@ -15,10 +15,6 @@ export const getAmPm = () => {
     return today.getHours() >= 12 ? 'PM' : 'AM';
 }
 
-export const getCurrentLocation = () => {
-    return 'Munchen';  
-};
-
 export const convertMonthToText = (month: number) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return months[month];

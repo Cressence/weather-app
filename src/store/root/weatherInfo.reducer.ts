@@ -48,7 +48,7 @@ const weatherInfo = (state = initialState, action: any) => {
           } else {
             return {
               ...state,
-              appError: action.data
+              appError: action.data.message
             };
           }
         }
