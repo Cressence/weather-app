@@ -64,8 +64,9 @@ const WeatherInfo = () => {
     }
 
     useEffect(() => {
+        const MAIN_ROUTE = process.env.REACT_APP_MAIN_ROUTE;
         if (weatherInfo === null) {
-            history.push("/weather-app");
+            history.push(`${MAIN_ROUTE}`);
         }
     }, [history, weatherInfo]);
     
@@ -82,11 +83,12 @@ const WeatherInfo = () => {
                     <div>
                     <p className='location-text'>{city}</p>
                         <TextField
-                            id="location-input"
-                            label="City" 
-                            variant="outlined"
+                            id='location-input'
+                            label='City'
+                            variant='outlined'
                             value={city}
                             onChange={changeCity}
+                            className='search-input'
                             InputProps={
                                 {
                                     endAdornment: 

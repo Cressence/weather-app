@@ -26,6 +26,7 @@ const Loading = ( ) => {
     }
 
     useEffect(() => {
+        const MAIN_ROUTE = process.env.REACT_APP_MAIN_ROUTE;
         dispatch(
             getWeatherData(
                 selectedCity === null? 'Munich': selectedCity,
@@ -34,7 +35,7 @@ const Loading = ( ) => {
         );
 
         if (weatherInfo !== null) {
-            history.push("/weather-app/info");
+            history.push(`${MAIN_ROUTE}/info`);
         }
     }, [dispatch, history, weatherInfo, selectedUnit, selectedCity]);
 

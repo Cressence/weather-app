@@ -1,4 +1,4 @@
-import { RESET, WEATHER_SUCCESS } from "./constants";
+import { RESET, WEATHER_SUCCESS, WEATHER_FAILURE } from "./constants";
 import Weather from "./../../api/models/weather.model";
 import { calculateAverageData } from "../../utils/helper";
 
@@ -50,6 +50,13 @@ const weatherInfo = (state = initialState, action: any) => {
               ...state,
               appError: action.data.message
             };
+          }
+        }
+        case WEATHER_FAILURE: {
+          return {
+            ...state,
+            weatherData: null,
+            appError: 'Ops! could not get weather data. Please try again'
           }
         }
         case RESET: {

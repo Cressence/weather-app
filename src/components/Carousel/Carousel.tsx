@@ -106,7 +106,6 @@ const Carousel = (props: CarouselProps) => {
                     {
                         // loop and display every page
                         pages(data, pageWidth).map((carouselLoop:Weather[], index: number) => {
-                            console.log(pages.length)
                             return (
                                 <div key={index}>
                                     <Grid container spacing={2}>
