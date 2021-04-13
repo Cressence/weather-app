@@ -7,6 +7,7 @@
     -moz-box-shadow: -1px 3px 10px #84848481;
     -webkit-box-shadow: -1px 3px 10px #84848481;
     box-shadow: -1px 3px 10px #84848481;
+    height: 280px;
 
     &:hover {
         cursor: pointer;
@@ -62,5 +63,14 @@
         font-size: $sub-title1;
         font-family: $black;
         margin-top: 5px;
+    }
+
+    @media (max-width: $small-devices){
+        margin-bottom: 25px;
+        height: 230px;
+    }
+
+    @media (max-width: $large-devices) and (min-width: $small-devices){
+        height: 230px;
     }
 }

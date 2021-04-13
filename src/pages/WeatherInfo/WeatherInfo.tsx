@@ -82,11 +82,12 @@ const WeatherInfo = () => {
                     <div>
                     <p className='location-text'>{city}</p>
                         <TextField
-                            id="location-input"
-                            label="City" 
-                            variant="outlined"
+                            id='location-input'
+                            label='City'
+                            variant='outlined'
                             value={city}
                             onChange={changeCity}
+                            className='search-input'
                             InputProps={
                                 {
                                     endAdornment: 
