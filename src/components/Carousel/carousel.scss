@@ -1,0 +1,14 @@
+.carousel-container {
+    .navigator-section {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 15px;
+        height: 70px;
+    }
+    .inactive {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+}

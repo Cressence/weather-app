@@ -1,13 +1,42 @@
+@font-face {
+  font-family: "Lato Thin";
+  src: local("Lato"), url(./assets/fonts/Lato/Lato-Thin.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Bold";
+  font-weight: 900;
+  src: local("Lato"), url(./assets/fonts/Lato/Lato-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Black";
+  font-weight: 900;
+  src: local("Lato"), url(./assets/fonts/Lato/Lato-Black.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: local("Lato"),
+    url(./assets/fonts/Lato/Lato-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Italic";
+  src: local("Lato"),
+    url(./assets/fonts/Lato/Lato-LightItalic.ttf) format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

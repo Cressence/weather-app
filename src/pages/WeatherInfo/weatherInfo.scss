@@ -1,0 +1,51 @@
+@import './../../assets/scss/variables.scss';
+
+.weather-info-container {
+    padding: 0 20px;
+
+    .current-location {
+        display: flex;
+        justify-content: space-between;
+
+        .time-text {
+            font-size: $big-title;
+            margin-bottom: 0;
+            font-family: 'Lato';
+            font-weight: 'Black';
+        }
+        .am-pm {
+            font-size: $sub-title1;
+            font-family: 'Lato';
+            font-weight: 'Bold';
+        }
+        .location-text {
+            font-size: $sub-title;
+        }
+        .date-text {
+            margin-top: 0;
+            letter-spacing: 2px;
+            font-family: 'Lato';
+            font-weight: 'Thin';
+        }
+        .time-section {
+            margin-bottom: 0;
+        }
+    }
+
+    .weather-card-section{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        margin-top: 20px;
+    }
+
+    @media (max-width: $small-devices){
+        .location-text {
+            font-size: $sub-title1;
+        }
+        .time-text {
+            font-size: $sub-title;
+        }
+    }
+       
+}
