@@ -1,7 +1,7 @@
 import React from 'react';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import Routes from './routes';
 
 interface AllProps {
@@ -13,9 +13,9 @@ const App = (props: AllProps) => {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 }
