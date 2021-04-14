@@ -20,7 +20,7 @@
 
     .loader {
         position: absolute;
-        margin-left: 10px;
+        margin-left: 4%;
 
         .dot {
             width: 20px;
@@ -41,7 +41,7 @@
         }
 
         @media (max-width: $medium-devices){
-            margin-left: 15px;
+            margin-left: 6%;
         }
     }
 
