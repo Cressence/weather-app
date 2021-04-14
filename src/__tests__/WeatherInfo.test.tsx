@@ -14,7 +14,7 @@ const server = setupServer(
     }),
 );
 
-const Wrapper = (props) => {return <Provider store={store}>{props.children}</Provider>};
+// const Wrapper = (props) => {return <Provider store={store}>{props.children}</Provider>};
 
 beforeAll(() => server.listen());
 afterEach(() => {

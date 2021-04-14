@@ -45,7 +45,7 @@ const Loading = ( ) => {
                 {
                     appError !== null ?
                     <div>
-                        <p data-testid='error-text' className='loader-text'>City "{selectedCity}" not found!</p>
+                        <p className='loader-text'>City "{selectedCity}" not found!</p>
                         <Button onClick={goBackToDefaultWeather} className='back-button' variant="contained" color="primary">Back</Button>
                     </div>             
                     :

@@ -7,8 +7,21 @@
     }
     .inactive {
         display: none;
+        animation: show .5s;
     }
     .active {
         display: block;
+        animation: show .5s;
+    }
+
+    @keyframes show {
+        from {
+            transform:scale(0.7);
+            opacity:0
+        }
+        to {
+            transform: scale(1);
+            opacity:1
+        }
     }
 }

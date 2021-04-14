@@ -1,15 +1,12 @@
-import { render } from "@testing-library/react";
-import { Provider } from "react-redux";
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import App from "./../App";
+import App from './../App';
 import {store} from "./../store/configureStore";
 
-const Wrapper = () => {return <Provider store={store}></Provider>};
-
-describe("renders the app component without failure", () => {
-    
-    it('<App /> with store', () => {
-       render( <App store={store} />, {wrapper: Wrapper});
-    });
-  
+test('renders the component', () => {
+  const component = shallow(
+  <App store={store} />
+  );
+  expect(component).toMatchSnapshot();
 });
