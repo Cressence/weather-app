@@ -2,12 +2,7 @@ import moment from "moment";
 
 export const getCurrentDate = () => {
     const today = moment()
-    return today.format('dddd, MMMM Do, YYYY')
-};
-
-export const getCurrentTime = () => {
-    const today = new Date();
-    return `${pad(today.getHours())}:${pad(today.getMinutes())}`;
+    return today.format('dddd, MMMM Do YYYY')
 };
 
 export const getAmPm = () => {
@@ -54,4 +49,4 @@ const round = (value:number, precision:number) => {
     return Math.round(value * multiplier) / multiplier;
 };
 
-const pad = (time:number) =>  time < 10 ? '0' + time : time;
+export const pad = (time:number) =>  time < 10 ? '0' + time : time;
