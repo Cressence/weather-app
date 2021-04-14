@@ -76,7 +76,7 @@ const WeatherInfo = () => {
                 <div className='current-location'>
                     <div>
                         <p className='time-section'>
-                            <span className='time-text'>{getCurrentTime()}</span> {' '}
+                            <span className='time-text' id='time-text'>{getCurrentTime()}</span> {' '}
                             <span className='am-pm'>{getAmPm()}</span></p>
                         <p className='date-text'>{getCurrentDate()}</p>
                     </div>
@@ -92,7 +92,7 @@ const WeatherInfo = () => {
                             InputProps={
                                 {
                                     endAdornment: 
-                                    <IconButton aria-label="search" onClick={searchCity}>
+                                    <IconButton disabled={city.trim().length === 0? true: false} aria-label="search" onClick={searchCity}>
                                         <Search />
                                     </IconButton>
                                 }
@@ -123,6 +123,6 @@ const WeatherInfo = () => {
         </Wrapper>
         
     );
-}
+};
 
 export default WeatherInfo;
