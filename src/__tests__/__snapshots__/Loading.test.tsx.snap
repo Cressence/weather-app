@@ -71,50 +71,36 @@ exports[`<Loading />: Loading Screen shows loader while data is loading 1`] = `
                 <div
                   className="MuiPaper-root MuiCard-root wrapper-content MuiPaper-elevation1 MuiPaper-rounded"
                 >
-                  <WithStyles(ForwardRef(CardContent))>
-                    <ForwardRef(CardContent)
-                      classes={
-                        Object {
-                          "root": "MuiCardContent-root",
-                        }
-                      }
-                    >
+                  <div
+                    className="loading-container"
+                  >
+                    <div>
+                      <p
+                        className="loader-text"
+                      >
+                        Almost there
+                      </p>
                       <div
-                        className="MuiCardContent-root"
+                        className="loader"
                       >
                         <div
-                          className="loading-container"
-                        >
-                          <div>
-                            <p
-                              className="loader-text"
-                            >
-                              Almost there
-                            </p>
-                            <div
-                              className="loader"
-                            >
-                              <div
-                                className="dot"
-                              />
-                              <div
-                                className="dot"
-                              />
-                              <div
-                                className="dot"
-                              />
-                              <div
-                                className="dot"
-                              />
-                              <div
-                                className="dot"
-                              />
-                            </div>
-                          </div>
-                        </div>
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
                       </div>
-                    </ForwardRef(CardContent)>
-                  </WithStyles(ForwardRef(CardContent))>
+                    </div>
+                  </div>
                 </div>
               </ForwardRef(Paper)>
             </WithStyles(ForwardRef(Paper))>

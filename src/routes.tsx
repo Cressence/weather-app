@@ -8,7 +8,7 @@ const Routes = () => {
       <Router>
         <Switch>
           <Route exact path={defaultPath} component={Loading} />
-          <Route exact path={`${defaultPath}/info`} component={WeatherInfo} />
+          <Route path={`${defaultPath}/info`} component={WeatherInfo} />
         </Switch>
       </Router>
   );
