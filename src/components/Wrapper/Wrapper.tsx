@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardContent} from '@material-ui/core';
+import {Card} from '@material-ui/core';
 
 import './wrapper.scss';
 
@@ -12,9 +12,7 @@ const Wrapper = (props: WrapperProps): React.ReactElement => {
     return(
         <div className='wrapper-container'>
             <Card className='wrapper-content'>
-                <CardContent>
                     {children}
-                </CardContent>
             </Card>
         </div>
     );

@@ -1,13 +1,8 @@
-export const getCurrentDate = () => {
-    const today = new Date();
-    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return `${weekdays[today.getDay()]}, ${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
-};
+import moment from "moment";
 
-export const getCurrentTime = () => {
-    const today = new Date();
-    return `${pad(today.getHours())}:${pad(today.getMinutes())}`;
+export const getCurrentDate = () => {
+    const today = moment()
+    return today.format('dddd, MMMM Do YYYY')
 };
 
 export const getAmPm = () => {
@@ -29,8 +24,8 @@ export const convertKelvinToCelcius = (kelvin: number) => {
 };
 
 export const formatDate = (date: string) => {
-    const formatedDate = new Date(date);
-    return `${formatedDate.getDate()} ${convertMonthToText(formatedDate.getMonth())} ${formatedDate.getUTCFullYear()}`;
+    const formatedDate = moment(date);
+    return formatedDate.format("Do  MMM,  YY");;
 };
 
 export const calculateAverageData = (arrTemps: number[], type:string) => {
@@ -54,4 +49,4 @@ const round = (value:number, precision:number) => {
     return Math.round(value * multiplier) / multiplier;
 };
 
-const pad = (time:number) =>  time < 10 ? '0' + time : time;
+export const pad = (time:number) =>  time < 10 ? '0' + time : time;

@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading />: Loading Screen shows loader while data is loading 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Loading>
+    <Wrapper>
+      <div
+        className="wrapper-container"
+      >
+        <WithStyles(ForwardRef(Card))
+          className="wrapper-content"
+        >
+          <ForwardRef(Card)
+            className="wrapper-content"
+            classes={
+              Object {
+                "root": "MuiCard-root",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(Paper))
+              className="MuiCard-root wrapper-content"
+              elevation={1}
+            >
+              <ForwardRef(Paper)
+                className="MuiCard-root wrapper-content"
+                classes={
+                  Object {
+                    "elevation0": "MuiPaper-elevation0",
+                    "elevation1": "MuiPaper-elevation1",
+                    "elevation10": "MuiPaper-elevation10",
+                    "elevation11": "MuiPaper-elevation11",
+                    "elevation12": "MuiPaper-elevation12",
+                    "elevation13": "MuiPaper-elevation13",
+                    "elevation14": "MuiPaper-elevation14",
+                    "elevation15": "MuiPaper-elevation15",
+                    "elevation16": "MuiPaper-elevation16",
+                    "elevation17": "MuiPaper-elevation17",
+                    "elevation18": "MuiPaper-elevation18",
+                    "elevation19": "MuiPaper-elevation19",
+                    "elevation2": "MuiPaper-elevation2",
+                    "elevation20": "MuiPaper-elevation20",
+                    "elevation21": "MuiPaper-elevation21",
+                    "elevation22": "MuiPaper-elevation22",
+                    "elevation23": "MuiPaper-elevation23",
+                    "elevation24": "MuiPaper-elevation24",
+                    "elevation3": "MuiPaper-elevation3",
+                    "elevation4": "MuiPaper-elevation4",
+                    "elevation5": "MuiPaper-elevation5",
+                    "elevation6": "MuiPaper-elevation6",
+                    "elevation7": "MuiPaper-elevation7",
+                    "elevation8": "MuiPaper-elevation8",
+                    "elevation9": "MuiPaper-elevation9",
+                    "outlined": "MuiPaper-outlined",
+                    "root": "MuiPaper-root",
+                    "rounded": "MuiPaper-rounded",
+                  }
+                }
+                elevation={1}
+              >
+                <div
+                  className="MuiPaper-root MuiCard-root wrapper-content MuiPaper-elevation1 MuiPaper-rounded"
+                >
+                  <div
+                    className="loading-container"
+                  >
+                    <div>
+                      <p
+                        className="loader-text"
+                      >
+                        Almost there
+                      </p>
+                      <div
+                        className="loader"
+                      >
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                        <div
+                          className="dot"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ForwardRef(Paper)>
+            </WithStyles(ForwardRef(Paper))>
+          </ForwardRef(Card)>
+        </WithStyles(ForwardRef(Card))>
+      </div>
+    </Wrapper>
+  </Loading>
+</Provider>
+`;

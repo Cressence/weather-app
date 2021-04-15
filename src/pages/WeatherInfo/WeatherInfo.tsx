@@ -16,7 +16,7 @@ import Wrapper from './../../components/Wrapper';
 import BarChart from './components/BarChart';
 import Carousel from './../../components/Carousel';
 import { 
-    getCurrentTime,
+    pad,
     getCurrentDate,
     getAmPm,
 } from './../../utils/helper';
@@ -28,10 +28,13 @@ import Weather from "./../../api/models/weather.model";
 const WeatherInfo = () => {
     const selectedUnit = localStorage.getItem('unit');
     const selectedCity = localStorage.getItem('city');
+
     // Component state
     const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null? 'fahrenheit': selectedUnit);
     const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
     const [city, setCity] = React.useState<string>(selectedCity === null? 'Munich': selectedCity);
+    const [minutes, setMinutes] = React.useState<number>(0);
+    const [hour, setHour] = React.useState<number>(0);
     const barSection = useRef<HTMLDivElement>(null);
 
     // Redux state
@@ -55,7 +58,12 @@ const WeatherInfo = () => {
     const onWeatherCardClick = (selectedCard:Weather) => {
         setSelectedInfo(selectedCard);
 
-        barSection.current?.scrollIntoView({ behavior: "smooth" });
+        const checkCardExist = setInterval(() => {
+            if (barSection.current !== null) {
+               barSection.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+               clearInterval(checkCardExist);
+            }
+         }, 100);
     }
 
     const changeCity = (e:any) => {
@@ -68,15 +76,22 @@ const WeatherInfo = () => {
         if (weatherInfo === null) {
             history.push(`${MAIN_ROUTE}`);
         }
+        
     }, [history, weatherInfo]);
-    
+
+    setInterval(() => {
+        const today = new Date();
+        setMinutes(today.getMinutes());
+        setHour(today.getHours())
+     }, 1000);
+
     return (
         <Wrapper>
             <div className='weather-info-container'>
                 <div className='current-location'>
                     <div>
                         <p className='time-section'>
-                            <span className='time-text'>{getCurrentTime()}</span> {' '}
+                            <span className='time-text' id='time-text'>{pad(hour) + ':' + pad(minutes)}</span> {' '}
                             <span className='am-pm'>{getAmPm()}</span></p>
                         <p className='date-text'>{getCurrentDate()}</p>
                     </div>
@@ -92,7 +107,7 @@ const WeatherInfo = () => {
                             InputProps={
                                 {
                                     endAdornment: 
-                                    <IconButton aria-label="search" onClick={searchCity}>
+                                    <IconButton disabled={city.trim().length === 0? true: false} aria-label="search" onClick={searchCity}>
                                         <Search />
                                     </IconButton>
                                 }
@@ -116,13 +131,13 @@ const WeatherInfo = () => {
                 }
                 
                 {
-                    selectedInfo !== null ? <BarChart temps={selectedInfo} unit={tempUnit} /> : null
+                    selectedInfo !== null ? <BarChart elementId={barSection} temps={selectedInfo} unit={tempUnit} /> : null
                 }
-                <div ref={barSection} />
+                {/* <div ref={barSection} /> */}
             </div>
         </Wrapper>
         
     );
-}
+};
 
 export default WeatherInfo;

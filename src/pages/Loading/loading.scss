@@ -3,7 +3,7 @@
 .loading-container {
     display: flex;
     justify-content: center;
-    top: 30%;
+    align-items: center;
     height: 100%;
     position: relative;
 
@@ -12,6 +12,7 @@
         font-size: $sub-title;
         font-weight: bolder;
         letter-spacing: 3px;
+        font-family: $bold;
     }
     .back-button {
       width: 150px;
@@ -20,7 +21,7 @@
 
     .loader {
         position: absolute;
-        margin-left: 10px;
+        margin-left: 4%;
 
         .dot {
             width: 20px;
@@ -41,7 +42,7 @@
         }
 
         @media (max-width: $medium-devices){
-            margin-left: 15px;
+            margin-left: 6%;
         }
     }
 

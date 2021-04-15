@@ -2,6 +2,11 @@
 
 .weather-info-container {
     padding: 0 20px;
+    margin-top: 20px;
+
+    .MuiTypography-body1 {
+        font-family: $normal;
+    }
 
     .current-location {
         display: flex;

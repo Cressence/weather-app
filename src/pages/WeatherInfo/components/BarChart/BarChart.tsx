@@ -14,10 +14,11 @@ import { formatDate } from '../../../../utils/helper';
 interface BarChartProps {
     temps: Weather;
     unit: string;
+    elementId: React.RefObject<HTMLDivElement>;
 }
 
 const BarChart = (props: BarChartProps) => {
-    const {temps, unit } =  props;
+    const {temps, unit, elementId } =  props;
     const data:any = [];
     
     temps.tempCollection.forEach((temp:any) => {
@@ -30,7 +31,7 @@ const BarChart = (props: BarChartProps) => {
     });
 
     return (
-        <div className='bar-chart-container'>
+        <div className='bar-chart-container' ref={elementId}>
             <Chart data={data}>
                 <ArgumentAxis tickSize={3} showLine={false} />
 
