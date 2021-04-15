@@ -17,7 +17,7 @@ const getWeatherDataPromise = async (city:string, tempUnit:string) => {
         })
     } catch (error) {
         console.log(error);
-        
+        return error;
     }
 };
 

@@ -72,9 +72,8 @@ const WeatherInfo = () => {
     }
 
     useEffect(() => {
-        const MAIN_ROUTE = process.env.REACT_APP_MAIN_ROUTE;
         if (weatherInfo === null) {
-            history.push(`${MAIN_ROUTE}`);
+            history.push('/');
         }
         
     }, [history, weatherInfo]);
