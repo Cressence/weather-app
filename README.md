@@ -76,3 +76,9 @@ To run existing tests in the project, run `npm run test`
 * Increase and improve test coverage
 * Setup a CI/CD pipeline for automatic deployment
 * Make application into a Google Chrome extension
+
+
+## Author
+
+* Github: [@Cressence](https://github.com/Cressence)
+* LinkedIn: [@yakam-cressence-685b55134](https://www.linkedin.com/in/yakam-cressence-685b55134/)
