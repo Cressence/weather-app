@@ -12,7 +12,7 @@ describe('<Loading />: Loading Screen', () => {
                     <Loading />
                 </Provider>
             );
-                
+
         expect(component).toMatchSnapshot();
     });
 });

@@ -16,7 +16,6 @@ describe('<WeatherInfo />: Weather Info Screen', () => {
                     <Router history={history}>
                         <WeatherInfo />
                     </Router>
-                    
                 </Provider>
             );
                       

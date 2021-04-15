@@ -22,22 +22,22 @@ exports[`<WeatherInfo />: Weather Info Screen renders correctly 1`] = `
         "entries": Array [
           Object {
             "hash": "",
-            "key": "zgjw5z",
+            "key": "if4yv7",
             "pathname": "/",
             "search": "",
             "state": undefined,
           },
           Object {
             "hash": "",
-            "key": "nx7x0n",
+            "key": "dudcua",
             "pathname": "/https://api.openweathermap.org/data/2.5/forecast",
             "search": "",
             "state": undefined,
           },
           Object {
             "hash": "",
-            "key": "2xju50",
-            "pathname": "/weather-app",
+            "key": "2ax26x",
+            "pathname": "/",
             "search": "",
             "state": undefined,
           },
@@ -50,8 +50,8 @@ exports[`<WeatherInfo />: Weather Info Screen renders correctly 1`] = `
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "key": "2xju50",
-          "pathname": "/weather-app",
+          "key": "2ax26x",
+          "pathname": "/",
           "search": "",
           "state": undefined,
         },
