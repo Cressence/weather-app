@@ -21,8 +21,8 @@ import {
     getAmPm,
 } from './../../utils/helper';
 import './weatherInfo.scss';
-import { resetData } from "./../../store/root/action";
-import { RootState } from '../../store/root/rootReducer';
+import { resetData } from "../../store/root/actions/action";
+import { RootState } from '../../store/root/reducers/rootReducer';
 import Weather from "./../../api/models/weather.model";
 
 const WeatherInfo = () => {
