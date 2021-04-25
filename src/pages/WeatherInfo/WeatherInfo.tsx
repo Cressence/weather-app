@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { 
+import {
     Radio,
     RadioGroup,
     FormControlLabel,
@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import Wrapper from './../../components/Wrapper';
 import BarChart from './components/BarChart';
 import Carousel from './../../components/Carousel';
-import { 
+import {
     pad,
     getCurrentDate,
     getAmPm,
@@ -30,9 +30,9 @@ const WeatherInfo = () => {
     const selectedCity = localStorage.getItem('city');
 
     // Component state
-    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null? 'fahrenheit': selectedUnit);
+    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null ? 'fahrenheit' : selectedUnit);
     const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
-    const [city, setCity] = React.useState<string>(selectedCity === null? 'Munich': selectedCity);
+    const [city, setCity] = React.useState<string>(selectedCity === null ? 'Munich' : selectedCity);
     const [minutes, setMinutes] = React.useState<number>(0);
     const [hour, setHour] = React.useState<number>(0);
     const barSection = useRef<HTMLDivElement>(null);
@@ -55,19 +55,19 @@ const WeatherInfo = () => {
         dispatch(resetData());
     }
 
-    const onWeatherCardClick = (selectedCard:Weather) => {
+    const onWeatherCardClick = (selectedCard: Weather) => {
         setSelectedInfo(selectedCard);
 
         const checkCardExist = setInterval(() => {
             if (barSection.current !== null) {
-               barSection.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-               clearInterval(checkCardExist);
+                barSection.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+                clearInterval(checkCardExist);
             }
-         }, 100);
+        }, 100);
     }
 
-    const changeCity = (e:any) => {
-        const cityVal:string = e.target.value;
+    const changeCity = (e: any) => {
+        const cityVal: string = e.target.value;
         setCity(cityVal);
     }
 
@@ -75,14 +75,14 @@ const WeatherInfo = () => {
         if (weatherInfo === null) {
             history.push('/');
         }
-        
+
     }, [history, weatherInfo]);
 
     setInterval(() => {
         const today = new Date();
         setMinutes(today.getMinutes());
         setHour(today.getHours())
-     }, 1000);
+    }, 1000);
 
     return (
         <Wrapper>
@@ -95,7 +95,7 @@ const WeatherInfo = () => {
                         <p className='date-text'>{getCurrentDate()}</p>
                     </div>
                     <div>
-                    <p className='location-text'>{city}</p>
+                        <p className='location-text'>{city}</p>
                         <TextField
                             id='location-input'
                             label='City'
@@ -105,22 +105,22 @@ const WeatherInfo = () => {
                             className='search-input'
                             InputProps={
                                 {
-                                    endAdornment: 
-                                    <IconButton disabled={city.trim().length === 0? true: false} aria-label="search" onClick={searchCity}>
-                                        <Search />
-                                    </IconButton>
+                                    endAdornment:
+                                        <IconButton disabled={city.trim().length === 0 ? true : false} aria-label="search" onClick={searchCity}>
+                                            <Search />
+                                        </IconButton>
                                 }
                             }
                         />
                     </div>
-                    
+
                 </div>
                 <div>
-                <FormControl>
-                    <RadioGroup row aria-label='temperature' name='temparature unit' value={tempUnit} onChange={toggleTempUnit} >
-                        <FormControlLabel value='celcius' control={<Radio color='primary' />} label="Celsius" />
-                        <FormControlLabel value='fahrenheit' control={<Radio color='primary' />} label='Fahrenheit' />
-                    </RadioGroup>
+                    <FormControl>
+                        <RadioGroup row aria-label='temperature' name='temparature unit' value={tempUnit} onChange={toggleTempUnit} >
+                            <FormControlLabel value='celcius' control={<Radio color='primary' />} label="Celsius" />
+                            <FormControlLabel value='fahrenheit' control={<Radio color='primary' />} label='Fahrenheit' />
+                        </RadioGroup>
                     </FormControl>
                 </div>
                 {
@@ -128,14 +128,13 @@ const WeatherInfo = () => {
                         <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} />
                         : null
                 }
-                
+
                 {
                     selectedInfo !== null ? <BarChart elementId={barSection} temps={selectedInfo} unit={tempUnit} /> : null
                 }
-                {/* <div ref={barSection} /> */}
             </div>
         </Wrapper>
-        
+
     );
 };
 
