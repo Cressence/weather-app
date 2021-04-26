@@ -8,5 +8,6 @@ test('renders the component', () => {
   const component = shallow(
   <App store={store} />
   );
+  
   expect(component).toMatchSnapshot();
 });

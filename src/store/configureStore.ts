@@ -1,9 +1,9 @@
 import { Store, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import rootReducer from './root/rootReducer';
+import rootReducer from './root/reducers/rootReducer';
 
-export const store =  configureStore();
+export const store = configureStore();
 
 function configureStore(): Store {
     // Build middleware

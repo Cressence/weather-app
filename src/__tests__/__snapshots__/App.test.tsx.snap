@@ -12,8 +12,6 @@ exports[`renders the component 1`] = `
     }
   }
 >
-  <HashRouter>
-    <Routes />
-  </HashRouter>
+  <Routes />
 </Provider>
 `;

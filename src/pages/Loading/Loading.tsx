@@ -5,11 +5,11 @@ import { useHistory } from "react-router-dom";
 import { Button } from '@material-ui/core';
 
 import Wrapper from './../../components/Wrapper';
-import { RootState } from '../../store/root/rootReducer';
-import { getWeatherData, resetData } from "./../../store/root/action";
+import { RootState } from '../../store/root/reducers/rootReducer';
+import { getWeatherData, resetData } from "../../store/root/actions/action";
 import './loading.scss';
 
-const Loading = ( ) => {
+const Loading = () => {
     const selectedUnit = localStorage.getItem('unit');
     const selectedCity = localStorage.getItem('city');
     const { weatherInfo, appError } = useSelector((state: RootState) => ({
@@ -28,8 +28,8 @@ const Loading = ( ) => {
     useEffect(() => {
         dispatch(
             getWeatherData(
-                selectedCity === null? 'Munich': selectedCity,
-                selectedUnit === null ? 'fahrenheit': selectedUnit
+                selectedCity === null ? 'Munich' : selectedCity,
+                selectedUnit === null ? 'fahrenheit' : selectedUnit
             )
         );
 
@@ -43,24 +43,24 @@ const Loading = ( ) => {
             <div className='loading-container'>
                 {
                     appError !== null ?
-                    <div>
-                        <p className='loader-text'>City "{selectedCity}" not found!</p>
-                        <Button onClick={goBackToDefaultWeather} className='back-button' variant="contained" color="primary">Back</Button>
-                    </div>             
-                    :
-                    <div>
-                    <p className='loader-text'>Almost there</p>
-                    <div className="loader">
-                        <div className="dot" />
-                        <div className="dot" />
-                        <div className="dot" />
-                        <div className="dot" />
-                        <div className="dot" />
-                    </div>
-                </div>
+                        <div>
+                            <p className='loader-text'>City "{selectedCity}" not found!</p>
+                            <Button onClick={goBackToDefaultWeather} className='back-button' variant="contained" color="primary">Back</Button>
+                        </div>
+                        :
+                        <div>
+                            <p className='loader-text'>Almost there</p>
+                            <div className="loader">
+                                <div className="dot" />
+                                <div className="dot" />
+                                <div className="dot" />
+                                <div className="dot" />
+                                <div className="dot" />
+                            </div>
+                        </div>
                 }
-                
-                
+
+
             </div>
         </Wrapper>
     );
