@@ -1,5 +1,5 @@
 import Weather from '../../../../api/models/weather.model';
-import { formatDate } from '../../../../utils/helper';
+import { formatDate, convertToCelcius } from '../../../../utils/helper';
 import './weatherCard.scss';
 
 interface WeatherProps {
@@ -7,18 +7,18 @@ interface WeatherProps {
 }
 
 const WeatherCard = (props: WeatherProps) => {
-    const {weatherInfo} = props;
+    const { weatherInfo } = props;
     const selectedUnit = localStorage.getItem('unit');
     return (
         <div className='weather-card-container'>
             <div className='weather-card-justify-content'>
                 <p className='temperature-text'>
-                    <span> { weatherInfo.temperature }</span> {' '} <span>
+                    <span> {selectedUnit === 'celcius' ? convertToCelcius(weatherInfo.temperature) : weatherInfo.temperature}</span> {' '} <span>
                         <sup>o</sup>
                         {
                             selectedUnit === null ? 'F'
-                            : 
-                            selectedUnit === 'celcius'? 'C' : 'F'
+                                :
+                                selectedUnit === 'celcius' ? 'C' : 'F'
                         }
                     </span>
                 </p>

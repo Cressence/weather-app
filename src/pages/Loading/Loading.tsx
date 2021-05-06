@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
@@ -10,6 +10,9 @@ import { getWeatherData, resetData } from "../../store/root/actions/action";
 import './loading.scss';
 
 const Loading = () => {
+    const [isMounted, setIsMounted] = useState(false);
+
+
     const selectedUnit = localStorage.getItem('unit');
     const selectedCity = localStorage.getItem('city');
     const { weatherInfo, appError } = useSelector((state: RootState) => ({
@@ -26,17 +29,22 @@ const Loading = () => {
     }
 
     useEffect(() => {
-        dispatch(
-            getWeatherData(
-                selectedCity === null ? 'Munich' : selectedCity,
-                selectedUnit === null ? 'fahrenheit' : selectedUnit
-            )
-        );
+        if (!isMounted) {
+            dispatch(
+                getWeatherData(
+                    selectedCity === null ? 'Munich' : selectedCity,
+                    selectedUnit === null ? 'fahrenheit' : selectedUnit
+                )
+            );
 
-        if (weatherInfo !== null) {
-            history.push('/info');
+            setIsMounted(true);
+        } else {
+            if (weatherInfo !== null) {
+                history.push('/info');
+            }
         }
-    }, [dispatch, history, weatherInfo, selectedUnit, selectedCity]);
+
+    }, [dispatch, history, weatherInfo, selectedUnit, selectedCity, isMounted, setIsMounted]);
 
     return (
         <Wrapper>

@@ -47,7 +47,6 @@ const WeatherInfo = () => {
     const toggleTempUnit = (event: any) => {
         setTempUnit(event.target.value.toLowerCase());
         localStorage.setItem('unit', event.target.value);
-        dispatch(resetData());
     }
 
     const searchCity = () => {
