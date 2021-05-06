@@ -29,14 +29,6 @@ const WeatherInfo = () => {
     const selectedUnit = localStorage.getItem('unit');
     const selectedCity = localStorage.getItem('city');
 
-    // Component state
-    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null ? 'fahrenheit' : selectedUnit);
-    const [selectedInfo, setSelectedInfo] = React.useState<Weather | null>(null);
-    const [city, setCity] = React.useState<string>(selectedCity === null ? 'Munich' : selectedCity);
-    const [minutes, setMinutes] = React.useState<number>(0);
-    const [hour, setHour] = React.useState<number>(0);
-    const barSection = useRef<HTMLDivElement>(null);
-
     // Redux state
     const { weatherInfo } = useSelector((state: RootState) => ({
         weatherInfo: state.weatherInfo.weatherData
@@ -44,10 +36,19 @@ const WeatherInfo = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const history = useHistory();
 
+    // Component state
+    const [tempUnit, setTempUnit] = React.useState<string>(selectedUnit === null ? 'fahrenheit' : selectedUnit);
+    const [selectedInfo, setSelectedInfo] = React.useState<Weather>(weatherInfo !== null ? weatherInfo[0] : {});
+    const [city, setCity] = React.useState<string>(selectedCity === null ? 'Munich' : selectedCity);
+    const [minutes, setMinutes] = React.useState<number>(0);
+    const [hour, setHour] = React.useState<number>(0);
+    const barSection = useRef<HTMLDivElement>(null);
+
+
+
     const toggleTempUnit = (event: any) => {
         setTempUnit(event.target.value.toLowerCase());
         localStorage.setItem('unit', event.target.value);
-        dispatch(resetData());
     }
 
     const searchCity = () => {
@@ -125,13 +126,16 @@ const WeatherInfo = () => {
                 </div>
                 {
                     weatherInfo !== null ?
-                        <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} />
+                        <div>
+                            <Carousel data={weatherInfo} clickGetInfo={onWeatherCardClick} />
+                            <BarChart elementId={barSection} temps={selectedInfo} unit={tempUnit} />
+                        </div>
+
                         : null
                 }
 
-                {
-                    selectedInfo !== null ? <BarChart elementId={barSection} temps={selectedInfo} unit={tempUnit} /> : null
-                }
+
+
             </div>
         </Wrapper>
 

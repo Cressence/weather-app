@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowBack, ArrowForward } from '@material-ui/icons';
-import {  Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import Weather from './../../api/models/weather.model';
 import WeatherCard from './../../pages/WeatherInfo/components/Weathercard';
@@ -11,7 +11,7 @@ interface CarouselProps {
     clickGetInfo: any;
 }
 
-const pages = (data:Weather[], width:number) => {   
+const pages = (data: Weather[], width: number) => {
     // Calculate the number of pages per device type
     const weatherArray = [];
 
@@ -19,56 +19,79 @@ const pages = (data:Weather[], width:number) => {
         //For tablets
         for (let count = 0; count < data.length; count += 2) {
             const currentCount = count;
-            const maxCount = (currentCount + 2) > (data.length -1) ? data.length: currentCount + 2;
+            const maxCount = (currentCount + 2) > (data.length - 1) ? data.length : currentCount + 2;
             weatherArray.push(data.slice(currentCount, maxCount));
-        } 
+        }
     } else if (width < 531) {
         //For mobile
-        for (let count = 0; count < data.length; count ++) {
+        for (let count = 0; count < data.length; count++) {
             const currentCount = count;
-            const maxCount = (currentCount + 1) > (data.length -1) ? data.length: currentCount + 1;
+            const maxCount = (currentCount + 1) > (data.length - 1) ? data.length : currentCount + 1;
             weatherArray.push(data.slice(currentCount, maxCount));
-        } 
+        }
     } else {
         //For laptops
         for (let count = 0; count < data.length; count += 3) {
             const currentCount = count;
-            const maxCount = (currentCount + 3) > (data.length -1) ? data.length: currentCount + 3;
+            const maxCount = (currentCount + 3) > (data.length - 1) ? data.length : currentCount + 3;
             weatherArray.push(data.slice(currentCount, maxCount));
-        } 
+        }
     }
-    
+
     return weatherArray;
 };
 
 const Carousel = (props: CarouselProps) => {
     const { data, clickGetInfo } = props;
-    const [activeIndex, setActiveIndex] = useState(0);
     const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    const carouselPages = pages(data, pageWidth);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [pageNum, setpageNum] = useState(0);
+    const [activeCard, setActiveCard] = useState<Weather | null>(carouselPages[0][0]);
+
 
     const goToPrevSlide = () => {
-        let index = activeIndex;
+        var index = activeIndex;
         let length = data.length;
         if (index < 1) {
             index = length - 1;
         } else {
             index--;
+
+            data.forEach((item, pageIndex) => {
+                if (item.date === carouselPages[index][0].date) {
+                    clickGetInfo(item);
+                    setActiveCard(item);
+                }
+            });
         }
-        
+
         setActiveIndex(index);
 
     }
- 
+
+    const handleCardclick = (item: Weather) => {
+        clickGetInfo(item);
+        setActiveCard(item);
+    }
+
     const goToNextSlide = () => {
         let index = activeIndex;
         let length = data.length;
+
         if (index === length - 1) {
             index = 0
         } else {
             index++;
+
+            data.forEach((item, pageIndex) => {
+                if (item.date === carouselPages[index][0].date) {
+                    clickGetInfo(item);
+                    setActiveCard(item);
+                }
+            });
         }
-        
+
         setActiveIndex(index);
     }
 
@@ -83,6 +106,7 @@ const Carousel = (props: CarouselProps) => {
         return () => window.removeEventListener("resize", updateWidth);
     }, [setPageWidth, data]);
 
+
     return (
         <div className='carousel-container'>
             <div className='carousel-item'>
@@ -90,28 +114,28 @@ const Carousel = (props: CarouselProps) => {
                     <div>
                         {
                             activeIndex > 0 ?
-                            <ArrowBack fontSize='large' onClick={goToPrevSlide} />
-                            : null
+                                <ArrowBack fontSize='large' onClick={goToPrevSlide} />
+                                : null
                         }
                     </div>
                     <div>
                         {
-                            activeIndex <  pageNum - 1 ?
-                            <ArrowForward fontSize='large' onClick={goToNextSlide} />
-                            : null
+                            activeIndex < pageNum - 1 ?
+                                <ArrowForward fontSize='large' onClick={goToNextSlide} />
+                                : null
                         }
                     </div>
                 </div>
-                
-                    {
-                        // loop and display every page
-                        pages(data, pageWidth).map((carouselLoop:Weather[], index: number) => {
-                            return (
-                                <div key={index}>
-                                    <Grid container spacing={2}>
-                                     {
+
+                {
+                    // loop and display every page
+                    carouselPages.map((carouselLoop: Weather[], index: number) => {
+                        return (
+                            <div key={index}>
+                                <Grid container spacing={2}>
+                                    {
                                         // Loop and display every item in each page
-                                        carouselLoop.map((info:Weather, count:number) => {
+                                        carouselLoop.map((info: Weather, count: number) => {
                                             return (
                                                 <Grid
                                                     key={count}
@@ -119,20 +143,22 @@ const Carousel = (props: CarouselProps) => {
                                                     xs={12}
                                                     sm={6}
                                                     md={4}
-                                                    onClick={() => clickGetInfo(info)}
+                                                    onClick={() => handleCardclick(info)}
                                                     className={index === activeIndex ? 'active' : 'inactive'}
                                                 >
-                                                    <WeatherCard weatherInfo={info} />
+                                                    <WeatherCard weatherInfo={info} active={
+                                                        activeCard && activeCard.date === info.date ? true : false
+                                                    } />
                                                 </Grid>
                                             );
                                         })
                                     }
-                                    </Grid> 
-                                </div>
-                            );
-                        })
-                    }          
-                
+                                </Grid>
+                            </div>
+                        );
+                    })
+                }
+
             </div>
         </div>
     );

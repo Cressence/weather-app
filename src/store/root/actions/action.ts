@@ -4,9 +4,8 @@ const APPID = process.env.REACT_APP_APPID;
 const URL = process.env.REACT_APP_API_URL;
 
 const getWeatherDataPromise = async (city: string, tempUnit: string) => {
-    const unit = tempUnit === 'celcius' ? 'metric' : 'imperial'
     try {
-        return fetch(`${URL}?q=${city.toLocaleLowerCase()}&APPID=${APPID}&units=${unit}`)
+        return fetch(`${URL}?q=${city.toLocaleLowerCase()}&APPID=${APPID}&units=imperial`)
             .then((data) => {
                 return new Promise(resolve => {
                     resolve(data.json());

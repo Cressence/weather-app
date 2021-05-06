@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Chart,
-  BarSeries,
-  Title,
-  ArgumentAxis,
+    Chart,
+    BarSeries,
+    Title,
+    ArgumentAxis,
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
 
@@ -18,15 +18,15 @@ interface BarChartProps {
 }
 
 const BarChart = (props: BarChartProps) => {
-    const {temps, unit, elementId } =  props;
-    const data:any = [];
-    
-    temps.tempCollection.forEach((temp:any) => {
+    const { temps, unit, elementId } = props;
+    const data: any = [];
+
+    temps.tempCollection.forEach((temp: any) => {
         const tableData = {
-            time: `${temp.main.temp}${unit === 'celcius'? 'C' : 'F'}`,
+            time: `${temp.main.temp}${unit === 'celcius' ? 'C' : 'F'}`,
             temperature: temp.main.temp
         }
-        
+
         data.push(tableData);
     });
 
@@ -41,9 +41,9 @@ const BarChart = (props: BarChartProps) => {
                 />
                 <Title text={formatDate(temps.date)} />
                 <Animation />
-            </Chart> 
+            </Chart>
         </div>
-        
+
     );
 };
 
