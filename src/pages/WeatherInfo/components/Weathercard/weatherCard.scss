@@ -12,6 +12,10 @@
         cursor: pointer;
     }
 
+    &.active-card {
+        background-color: #969696;
+    }
+
     .weather-icon {
         float: right;
     }
@@ -64,12 +68,12 @@
         margin-top: 5px;
     }
 
-    @media (max-width: $small-devices){
+    @media (max-width: $small-devices) {
         margin-bottom: 25px;
         height: 230px;
     }
 
-    @media (max-width: $large-devices) and (min-width: $small-devices){
+    @media (max-width: $large-devices) and (min-width: $small-devices) {
         height: 220px;
     }
 }
